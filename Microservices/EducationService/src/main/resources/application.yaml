@@ -1,0 +1,27 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /api/education
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  application:
+    name: education-service
+  data:
+    rest:
+      base-path: /v0
+      #detection-strategy: annotated
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=EDUCATION;encrypt=false;trustServerCertificate=true
+    username: admin
+    password: 1
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+

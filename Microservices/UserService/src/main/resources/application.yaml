@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=SCHOOL;encrypt=false;trustServerCertificate=true
+    username: admin
+    password: 1
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+  data:
+    rest:
+      detection-strategy: annotated
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 86400000
+      refresh-token:
+        expiration: 604800000
+server:
+  port: 8083
+logging:
+  level:
+    web: DEBUG
+    org.springframework:
+      http:
+        converter:
+          json: DEBUG
+      transaction: DEBUG
+    org.hibernate:
+      SQL: DEBUG
+      type: TRACE
+    org.springframework.web: DEBUG
+    com.fasterxml.jackson: DEBUG
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true

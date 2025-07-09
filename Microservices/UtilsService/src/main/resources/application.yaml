@@ -1,0 +1,27 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /api/utils
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  application:
+    name: utils-service
+  data:
+    rest:
+      base-path: /v0
+      detection-strategy: annotated
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=UTILS;encrypt=false;trustServerCertificate=true
+    username: admin
+    password: 1
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
