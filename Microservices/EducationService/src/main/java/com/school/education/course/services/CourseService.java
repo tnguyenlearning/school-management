@@ -11,14 +11,16 @@ import org.springframework.stereotype.Service;
 
 import com.school.education.clients.BillingServiceClient;
 import com.school.education.clients.dtos.CourseAllowedFrequencyRequest;
-import com.school.education.constants.CourseStatus;
 import com.school.education.course.dtos.CourseRequest;
 import com.school.education.course.entities.Course;
 import com.school.education.course.repositories.CourseRepository;
+import com.school.education.enrollment.entities.Enrollment;
 import com.school.education.enrollment.entities.Student;
+import com.school.education.enrollment.repositories.EnrollmentRepository;
 import com.school.education.validators.StatusValidator;
 import com.school.utilslibrary.clients.billing.dtos.AllowedFrequencyRequest;
-import com.school.utilslibrary.constants.GlobalConstants;
+import com.school.utilslibrary.clients.billing.dtos.BulkNextBillingDateRequest;
+import com.school.utilslibrary.clients.education.constants.CourseStatus;
 import com.school.utilslibrary.exception.NotFoundException;
 
 import feign.FeignException;
@@ -30,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 public class CourseService {
 
 	private final CourseRepository courseRepository;
-	// private final EnrollmentService enrollmentService;
+	private final EnrollmentRepository enrollmentRepository;
 	private final ModelMapper modelMapper;
 
 	private final BillingServiceClient billingServiceClient;
@@ -70,13 +72,17 @@ public class CourseService {
 
 	@Transactional
 	public Course update(Long courseId, CourseRequest request, List<Long> frequencyIds) {
-		Course course = findById(courseId);
-		if (course.getStatus() != request.getStatus()) {
+		boolean isUpdateBilling = false;
+		Course existingCourse = findById(courseId);
+		if (existingCourse.getStatus() != request.getStatus()) {
 //			validateCourseStatus(courseId, request.getStatus());
 //			persistEnrollmentStatus(courseId, request.getStatus());
 		}
+		if (existingCourse.getStartDate() != request.getStartDate()) {
+			isUpdateBilling = true;
+		}
 
-		course = modelMapper.map(request, Course.class);
+		Course course = modelMapper.map(request, Course.class);
 		course.setId(courseId);
 		course.validate();
 
@@ -93,6 +99,21 @@ public class CourseService {
 			billingServiceClient.updateCourseAllowedFrequency(courseId, allowedFrequencyRequest);
 		} catch (FeignException e) {
 			throw new RuntimeException("Failed to create course frequency!", e); // This will trigger rollback
+		}
+		
+		if (isUpdateBilling) {
+			List<Long> enrollmentIds = enrollmentRepository.findIdsByCourseId(courseId);
+			if (!enrollmentIds.isEmpty()) {
+				try {
+					BulkNextBillingDateRequest billingDto = new BulkNextBillingDateRequest();
+					billingDto.setEnrollmentIds(enrollmentIds);
+					billingDto.setNextBillingDate(request.getStartDate());
+					billingServiceClient.updateBillingInfo(billingDto);
+				} catch (FeignException e) {
+					throw new RuntimeException("Failed to update NextBillingDate!", e); // This will trigger rollback
+				}
+			}
+			
 		}
 
 		return courseRepository.save(course);

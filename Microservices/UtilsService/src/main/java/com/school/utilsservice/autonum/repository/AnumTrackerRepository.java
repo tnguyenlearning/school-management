@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.school.utilslibrary.constants.AnumType;
 import com.school.utilsservice.autonum.entity.AnumTracker;
-import com.school.utilsservice.constants.AnumType;
 
 @Repository
 public interface AnumTrackerRepository extends JpaRepository<AnumTracker, Long> {

@@ -6,8 +6,8 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
-import com.school.education.constants.CourseStatus;
 import com.school.education.enrollment.entities.Enrollment;
+import com.school.utilslibrary.clients.education.constants.CourseStatus;
 import com.school.utilslibrary.constants.GlobalConstants;
 import com.school.utilslibrary.exception.BadRequestException;
 

@@ -45,7 +45,7 @@ public class Receipt {
 	@Column(nullable = false)
 	private LocalDate receiptDate;
 
-	private String remark;
+	private String remarks;
 
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)

@@ -114,6 +114,7 @@ public class EnrollmentService {
 			DataForBillingDTO dto = new DataForBillingDTO();
 			dto.setEnrollmentId(e.getId());
 			dto.setCourseCode(e.getCourse().getCode());
+			dto.setCourseStatus(e.getCourse().getStatus());
 			dto.setStudentCode(e.getStudent().getStudentCode());
 			dto.setStatus(e.getStatus());
 			dto.setEndDate(e.getEndDate());

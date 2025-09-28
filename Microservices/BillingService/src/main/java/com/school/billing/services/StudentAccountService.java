@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.school.billing.clients.EducationServiceClient;
-import com.school.billing.constants.StudentAccountType;
 import com.school.billing.controllers.StudentAccountDetailsDTO;
 import com.school.billing.entities.StudentAccount;
 import com.school.billing.repositories.PaymentRepository;
 import com.school.billing.repositories.ReceiptRepository;
 import com.school.billing.repositories.StudentAccountRepository;
+import com.school.utilslibrary.constants.StudentAccountType;
 import com.school.utilslibrary.exception.BadRequestException;
 import com.school.utilslibrary.exception.NotFoundException;
 

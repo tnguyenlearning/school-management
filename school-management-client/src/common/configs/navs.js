@@ -143,6 +143,11 @@ export const studentManageNav = [
         icon: <AppstoreOutlined />,
     },
     {
+        label: 'Leave',
+        key: urls.leavesManagement,
+        icon: <AppstoreOutlined />,
+    },
+    {
         label: 'Tuition  Management',
         key: urls.tuitionMaintenance,
         icon: <AppstoreOutlined />,

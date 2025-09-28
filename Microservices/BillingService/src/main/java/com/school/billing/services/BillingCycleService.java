@@ -32,6 +32,8 @@ import com.school.billing.repositories.InvoiceRepository;
 import com.school.billing.repositories.PaymentRepository;
 import com.school.utilslibrary.clients.billing.dtos.DataForBillingDTO;
 import com.school.utilslibrary.clients.billing.dtos.DataForBillingRequest;
+import com.school.utilslibrary.clients.education.constants.CourseStatus;
+import com.school.utilslibrary.constants.GlobalConstants;
 import com.school.utilslibrary.restapi.ApiResponse;
 
 import jakarta.transaction.Transactional;
@@ -78,6 +80,9 @@ public class BillingCycleService {
 		}
 
 		for (DataForBillingDTO billing : billings) {
+			if (!billing.getCourseStatus().equals(CourseStatus.ONGOING)) {
+				continue;
+			}
 			Set<DayOfWeek> learningDays = billing.getLearningDays();
 			LocalDate endDate = billing.getEndDate();
 			Long enrollmentId = billing.getEnrollmentId();
@@ -202,16 +207,15 @@ public class BillingCycleService {
 				learningDayCount++;
 			}
 			currentDate = currentDate.plusDays(1);
+		} //  loop finishes, currentDate has already been advanced by one day
+
+		LocalDate cycleEndDate = currentDate.minusDays(1);
+		if (cycleEndDate.isAfter(endEnrollDate)) {
+		    cycleEndDate = endEnrollDate;
+		    return new BillingPeriod(cycleEndDate, GlobalConstants.MAX_DATE, learningDayCount);
 		}
 
-		if (currentDate.isAfter(endEnrollDate)) {
-			currentDate = endEnrollDate;
-		}
-		LocalDate cycleEndDate = currentDate;
-
-		LocalDate nextCycleStartDate = cycleEndDate.plusDays(1); // Start the next cycle the day after the current cycle
-																	// ends
-
+		LocalDate nextCycleStartDate = cycleEndDate.plusDays(1);
 		// Find the next valid learning day after the cycleEndDate
 		while (!learningDays.contains(nextCycleStartDate.getDayOfWeek())) {
 			nextCycleStartDate = nextCycleStartDate.plusDays(1);

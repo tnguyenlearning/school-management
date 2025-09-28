@@ -17,8 +17,8 @@ public class ReceiptService {
 	private final StudentAccountService studentAccountService;
 
 	@Transactional
-	public Receipt create(Long studentAccountId, Receipt request) {
-		StudentAccount stAccount = studentAccountService.findById(studentAccountId);
+	public Receipt create(String studentCode, Receipt request) {
+		StudentAccount stAccount = studentAccountService.findByStudentCode(studentCode);
 		stAccount.setBalanceAmount(stAccount.getBalanceAmount().add(request.getAmount()));
 		studentAccountService.save(stAccount);
 		

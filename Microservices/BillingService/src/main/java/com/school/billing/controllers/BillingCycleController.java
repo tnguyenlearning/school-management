@@ -29,7 +29,6 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/v2/billing-cycles")
 @RequiredArgsConstructor
-
 public class BillingCycleController {
 
 	private final BillingCycleService billingCycleService;

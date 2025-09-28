@@ -15,7 +15,7 @@ import com.school.billing.services.RefundService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/v2/refunds")
+@RequestMapping("/v2/refunds")
 @RequiredArgsConstructor
 
 public class RefundController {

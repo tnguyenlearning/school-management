@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Set;
 
-import com.school.education.constants.CourseStatus;
+import com.school.utilslibrary.clients.education.constants.CourseStatus;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

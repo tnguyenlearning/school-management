@@ -21,12 +21,13 @@ import com.school.utilslibrary.clients.billing.constants.EnrollmentStatus;
 import jakarta.transaction.Transactional;
 
 @RepositoryRestResource(path = "enrollments")
-
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
 
 	@Query("SELECT e FROM Enrollment e WHERE e.course.id = :courseId")
-	List<Enrollment> findAllByCourseId(String courseId);
+	List<Enrollment> findAllByCourseId(Long courseId);
 
+	@Query("SELECT e.id FROM Enrollment e WHERE e.course.id = :courseId")
+	List<Long> findIdsByCourseId(Long courseId);
 	
 	@Query("SELECT e FROM Enrollment e WHERE e.id IN :enrollmentIds")
 	List<Enrollment> findAllByEnrollmentIds(@Param("enrollmentIds") List<Long> enrollmentIds);

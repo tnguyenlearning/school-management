@@ -4,9 +4,9 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
-import com.school.education.constants.CourseStatus;
 import com.school.education.enrollment.entities.Enrollment;
 import com.school.utilslibrary.clients.billing.constants.EnrollmentStatus;
+import com.school.utilslibrary.clients.education.constants.CourseStatus;
 import com.school.utilslibrary.exception.BadRequestException;
 
 public class StatusValidator {

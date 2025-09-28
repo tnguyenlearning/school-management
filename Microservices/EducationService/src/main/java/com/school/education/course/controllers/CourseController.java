@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.school.education.clients.BillingServiceClient;
-import com.school.education.clients.dto.FrequencyOptionResponseDTO;
+import com.school.education.clients.dtos.FrequencyOptionResponseDTO;
+import com.school.education.course.dtos.CourseSetupRequest;
 import com.school.education.course.entities.Course;
 import com.school.education.course.services.CourseService;
-import com.school.education.dtos.CourseSetupRequest;
 import com.school.utilslibrary.restapi.ApiResponse;
 import com.school.utilslibrary.restapi.ApiResponseBuilder;
 
@@ -54,11 +54,11 @@ public class CourseController {
 
 	@PutMapping("{courseId}")
 	@ResponseStatus(HttpStatus.OK)
-	public ApiResponse<Course> updateCourse(@PathVariable Long courseId,
+	public ApiResponse<String> updateCourse(@PathVariable Long courseId,
 			@RequestBody CourseSetupRequest courseSetupRequest) {
-		Course updatedCourse = courseService.update(courseId, courseSetupRequest.getCourse(),
+		courseService.update(courseId, courseSetupRequest.getCourse(),
 				courseSetupRequest.getFrequencyOptionIds());
-		return ApiResponseBuilder.success("Course updated successfully", updatedCourse, null);
+		return ApiResponseBuilder.success("Course updated successfully", "updated", null);
 	}
 
 //	@GetMapping("/{courseId}/students/searchByStudentCodeNotEnrolled")

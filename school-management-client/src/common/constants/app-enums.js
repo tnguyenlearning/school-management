@@ -62,3 +62,21 @@ export const PAYMENT_METHODS = {
     CARD: 'CARD',
     BANK_TRANSFER: 'BANK_TRANSFER',
 };
+
+export const LeaveStatus = {
+    REQUESTED: 'REQUESTED',
+    APPROVED: 'APPROVED',
+    REJECTED: 'REJECTED',
+};
+
+export const RefundType = {
+    MONEY: 'MONEY',
+    CREDIT_SESSION: 'CREDIT_SESSION',
+    NONE: 'NONE',
+};
+
+export const RefundStatus = {
+    NOT_ELIGIBLE: 'NOT_ELIGIBLE',
+    ELIGIBLE: 'ELIGIBLE',
+    REFUNDED: 'REFUNDED',
+};

@@ -16,7 +16,7 @@ const apiCallNoPage = async (specialURL, method = 'GET', body = null, headers = 
         if (!response.ok) {
             errorData = await response.json();
             console.error(`API call failed: ${url} - Error:`, errorData);
-            throw new Error(errorData.message || 'An error occurred while processing the request.');
+            throw new Error(errorData.message || errorData.errorMessage || 'An error occurred while processing the request.');
         }
 
         const data = await response.json();

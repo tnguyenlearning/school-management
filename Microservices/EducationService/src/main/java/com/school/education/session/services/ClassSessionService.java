@@ -30,18 +30,25 @@ public class ClassSessionService {
 
 	public void createSessionsForCourse(Long courseId, int monthsAhead) {
 		Course course = courseService.findById(courseId);
+		Optional<ClassSession> lastSessionOpt = classSessionRepository.findTopByCourseOrderBySessionDateDesc(course);
 
-		LocalDate currentDate = course.getStartDate();
-		LocalDate endDate = course.getEndDate() != null ? course.getEndDate() : currentDate.plusMonths(monthsAhead);
+		LocalDate currentDate;
+		if (lastSessionOpt.isPresent()) {
+			currentDate = lastSessionOpt.get().getSessionDate().plusDays(1);
+		} else {
+			currentDate = course.getStartDate();
+		}
+
+		LocalDate courseEndDate = course.getEndDate();
+		LocalDate targetDate = currentDate.plusMonths(monthsAhead);
+		LocalDate endDate = targetDate.isBefore(courseEndDate) || targetDate.isEqual(courseEndDate)
+				? targetDate
+				: courseEndDate;
 
 		while (!currentDate.isAfter(endDate)) {
 			if (course.getDaysOfWeek().contains(currentDate.getDayOfWeek())) {
-				// Check if the session already exists for this course and session date
-				Optional<ClassSession> existingSession = classSessionRepository.findByCourseAndSessionDate(course,
-						currentDate);
-
+				Optional<ClassSession> existingSession = classSessionRepository.findByCourseAndSessionDate(course, currentDate);
 				if (!existingSession.isPresent()) {
-					// Create a new ClassSession if it doesn't exist
 					ClassSession session = new ClassSession();
 					session.setCourse(course);
 					session.setSessionDate(currentDate);
@@ -66,60 +73,6 @@ public class ClassSessionService {
 		ClassSession createdClassSession = classSessionRepository.save(session);
 
 		return createdClassSession.getId();
-	}
-
-	public Long updateSessionStatus(Long sessionId, SessionStatus newStatus) {
-		ClassSession session = classSessionRepository.findById(sessionId)
-				.orElseThrow(() -> new RuntimeException("Session not found"));
-		session.setStatus(newStatus);
-		ClassSession updatedSession = classSessionRepository.save(session);
-
-		return updatedSession.getId();
-	}
-	
-
-
-	public void markAttendance(Long sessionId, Long studentId, Attendance request) {
-		ClassSession session = classSessionRepository.findById(sessionId)
-				.orElseThrow(() -> new RuntimeException("Session not found"));
-		/* Call API to check student id */
-
-		Attendance attendance = attendanceRepository.findByClassSessionAndStudentId(session, studentId)
-				.orElse(new Attendance());
-
-		attendance.setClassSession(session);
-		attendance.setStudentId(studentId);
-		attendance.setStatus(request.getStatus());
-		attendance.setRemarks(request.getRemarks());
-		
-		attendanceRepository.save(attendance);
-	}
-
-	@Transactional
-	public void markAttendancesForSession(Long sessionId, List<Attendance> requests) {
-		ClassSession session = classSessionRepository.findById(sessionId)
-				.orElseThrow(() -> new RuntimeException("Session not found"));
-		
-		List<Attendance> attendances = new ArrayList<>();
-		for (Attendance request : requests) {
-			/* Call API to check student id */
-			
-			Attendance attendance = attendanceRepository.findByClassSessionAndStudentId(session, request.getStudentId())
-					.orElse(new Attendance());
-
-			attendance.setClassSession(session);
-			attendance.setStudentId(request.getStudentId());
-			attendance.setStatus(request.getStatus());
-			attendance.setRemarks(request.getRemarks());
-
-			attendances.add(attendance);
-		}
-
-		// Perform batch update
-		// You can directly save all the attendance records with EntityManager
-		for (Attendance attendance : attendances) {
-			entityManager.merge(attendance); // Merge updates into the session
-		}
 	}
 
 }

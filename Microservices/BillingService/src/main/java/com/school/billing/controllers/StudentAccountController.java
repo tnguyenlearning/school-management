@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.school.billing.constants.StudentAccountType;
 import com.school.billing.entities.StudentAccount;
 import com.school.billing.services.StudentAccountService;
+import com.school.utilslibrary.constants.StudentAccountType;
 import com.school.utilslibrary.restapi.ApiResponse;
 import com.school.utilslibrary.restapi.ApiResponseBuilder;
 

@@ -24,5 +24,3 @@ export const getCourseById = async (courseId) => {
 export const createCourse = async (courseData) => apiCallNoPage('/education/v2/courses', 'POST', courseData);
 export const updateCourse = async (id, courseData) => apiCallNoPage(`/education/v2/courses/${id}`, 'PUT', courseData);
 export const deleteCourse = async (id) => apiCallNoPage(`/education/v0/courses/${id}`, 'DELETE');
-
-export const generateSessionsForCourse = (courseId, monthsAhead) => apiCallNoPage(`/education/v2/courses/${courseId}/sessions/generate?monthsAhead=${monthsAhead}`, 'POST');

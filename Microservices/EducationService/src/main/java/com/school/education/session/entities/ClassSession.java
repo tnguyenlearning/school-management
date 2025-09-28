@@ -36,6 +36,9 @@ public class ClassSession {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@OneToMany(mappedBy = "classSession", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Attendance> attendances;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "course_id", nullable = false)
 	private Course course;
@@ -49,8 +52,5 @@ public class ClassSession {
 
 	@Enumerated(EnumType.STRING)
 	private SessionStatus status;
-
-	@OneToMany(mappedBy = "classSession", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Attendance> attendances;
 
 }

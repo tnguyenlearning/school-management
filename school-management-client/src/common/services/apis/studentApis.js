@@ -12,6 +12,6 @@ export const getStudentByFirstName = async (firstName) => await apiCallNoPage(`/
 
 export const getStudentEnrollment = async (studentId) => apiCallNoPage(`/education/v0/students/${studentId}/enrollments`);
 
-export const createStudent = async (studentData) => apiCallNoPage('/education/v0/students', 'POST', studentData);
+export const createStudent = async (studentData) => apiCallNoPage('/education/v2/students', 'POST', studentData);
 export const updateStudent = async (id, studentData) => apiCallNoPage(`/education/v0/students/${id}`, 'PUT', studentData);
 export const deleteStudent = async (id) => apiCallNoPage(`/education/v0/students/${id}`, 'DELETE');

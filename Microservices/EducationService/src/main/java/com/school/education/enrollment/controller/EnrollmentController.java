@@ -34,7 +34,7 @@ public class EnrollmentController {
 		return List.of("Enrollment 1", "Enrollment 2", "Enrollment 3");
 	}
 
-	@GetMapping("/courses/{courseId}")
+	@GetMapping("/courses/{courseId}/studentsDetail")
 	@ResponseStatus(HttpStatus.OK)
 	public ApiResponse<?> getStudentAndEnrollmentsByEnrollmentId(@PathVariable Long courseId) {
 		return ApiResponseBuilder.success(null, enrollmentService.findStudentsAndEnrollmentByCourseId(courseId), null);

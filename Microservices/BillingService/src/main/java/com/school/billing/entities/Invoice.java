@@ -55,6 +55,9 @@ public class Invoice {
 	@OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<InvoiceRefund> invoiceRefunds;
 
+	@OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<SessionRefund> sessionRefunds;
+
 	@NotNull(message = "CourseCode cannot be empty")
 	@Column(nullable = false)
 	private String courseCode;

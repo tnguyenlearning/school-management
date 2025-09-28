@@ -21,14 +21,22 @@ const urls = {
     coursesMaintenance: '/courses-maintenance',
     courseForm: '/courses/form/:action/:courseId?',
     baseCourseForm: '/courses/form',
-    generateSession: 'courses/:courseId?/generate-session',
     courseStudentManage: '/courses/:courseId?/manage-student-incourse',
     addStudentsToCourse: '/courses/:courseId?/add-student',
-    sessionsManagement: 'sessions/:courseId?/manage',
-    AttendancesMPage: '/courses/:courseId/sessions/:sessionId/attendances',
+
     studentEnroll: '/course/:courseId/student-enroll',
     enrollStudent: '/course/:courseId/enroll-student/:studentId',
     manageEnrollment: '/course/:courseId/student/:studentId/enrollment/:enrollmentId/manage',
+
+    leavesManagement: '/leave-management',
+    leaveForm: '/leave/form/:action/:leaveId?',
+    baseLeaveForm: '/leave/form',
+    leaveRequest: '/courses/:courseId/sessions/:sessionId/students/:studentId/leave-request',
+    leaveApproval: '/leave-approval',
+    leaveEnquiry: '/leave-enquiry',
+
+    manageSession: '/courses/:courseId?/sessions/manage',
+    AttendancesMPage: '/courses/:courseId/sessions/:sessionId/attendances',
 
     tuitionMaintenance: '/tuitions-maintenance',
     billingCycle: '/billing-cycle',
@@ -58,10 +66,10 @@ const urls = {
     baseStudentAccountForm: '/student-accounts/form',
 
     receiptManagement: '/receipt',
-    receiptForm: '/receipt/form/:action/:studentCode?/:studentAccountId?',
+    receiptForm: '/receipt/form/:action/:studentCode?',
     baseReceiptForm: '/receipt/form',
 
-    balanceDetails: '/balance-details/:studentAccountId?',
+    balanceDetails: '/balance-details/:studentCode?',
     baseBalanceDetails: '/balance-details',
 };
 

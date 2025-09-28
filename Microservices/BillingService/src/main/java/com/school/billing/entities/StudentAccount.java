@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.school.billing.constants.StudentAccountType;
+import com.school.utilslibrary.constants.StudentAccountType;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

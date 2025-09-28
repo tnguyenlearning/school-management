@@ -1,38 +1,42 @@
-import Home from '../../pages/Home';
-import Register from '../../pages/Register';
-import Login from '../../pages/Login';
-import Logout from '../../pages/Logout';
-import Profile from '../../pages/Profile';
+import Home from '../../pages/common/Home';
+import Register from '../../pages/common/Register';
+import Login from '../../pages/common/Login';
+import Logout from '../../pages/common/Logout';
+import Profile from '../../pages/common/Profile';
 import urls from './urls';
 import SpecialLayout from '../../layouts/SpecialLayout';
-import Special from '../../pages/Special';
-import networkErr from '~/pages/NetworkErr';
-import StudentForm from '~/pages/students/StudentForm';
-import StudentsMPage from '~/pages/students/StudentsMPage';
-import CoursesMPage from '~/pages/courses/CoursesMPage';
-import CourseForm from '~/pages/courses/CourseForm';
-import GenerateSession from '~/pages/courses/GenerateSession';
-import SessionsManagement from '~/pages/sessions/SessionsManagement';
-import AttendancesMPage from '~/pages/attendance/AttendancesMPage ';
-import CourseStudentsMPage from '~/pages/courseStudents/CourseStudentsMPage';
-import EligibleStudentsEnrollPage from '~/pages/enrollment/EligibleStudentsEnrollPage';
-import BillingsMPage from '~/pages/billings/BillingsMPage';
-import GenerateBillingPage from '~/pages/billings/GenerateBillingPage';
+import Special from '../../pages/common/Special';
+import networkErr from '~/pages/common/NetworkErr';
+import StudentForm from '~/pages/education/students/StudentForm';
+import StudentsMPage from '~/pages/education/students/StudentsMPage';
+import CoursesMPage from '~/pages/education/courses/CoursesMPage';
+import CourseForm from '~/pages/education/courses/CourseForm';
+import AttendancesMPage from '~/pages/education/attendance/AttendancesMPage ';
+import CourseStudentsMPage from '~/pages/education/courseStudents/CourseStudentsMPage';
+import EligibleStudentsEnrollPage from '~/pages/education/enrollment/EligibleStudentsEnrollPage';
+import BillingsMPage from '~/pages/billing/billings/BillingsMPage';
+import GenerateBillingPage from '~/pages/billing/billings/GenerateBillingPage';
 import AutoNumMPage from '~/pages/autonum/AutoNumMPage';
 import GenerateAutoNumPage from '~/pages/autonum/GenerateAutoNumPage';
 import ReclaimAutoNumPage from '~/pages/autonum/ReclaimAutoNumPage';
-import EnrollStudentToCoursePage from '~/pages/enrollment/EnrollStudentToCoursePage';
-import BillingsEnquiryPage from '~/pages/billings/BillingsEnquiryPage';
-import FrequencyOptMPage from '~/pages/billings/FrequencyOptMPage';
-import FrequencyOptForm from '~/pages/billings/FrequencyOptForm';
-import ManageEnrollmentPage from '~/pages/enrollment/ManageEnrollmentPage';
-import InvoicesEnquiryPage from '~/pages/billings/InvoicesEnquiryPage';
-import StudentAccountForm from '~/pages/studentAccount/StudentAccountForm';
+import EnrollStudentToCoursePage from '~/pages/education/enrollment/EnrollStudentToCoursePage';
+import BillingsEnquiryPage from '~/pages/billing/billings/BillingsEnquiryPage';
+import FrequencyOptMPage from '~/pages/billing/billings/FrequencyOptMPage';
+import FrequencyOptForm from '~/pages/billing/billings/FrequencyOptForm';
+import ManageEnrollmentPage from '~/pages/education/enrollment/ManageEnrollmentPage';
+import InvoicesEnquiryPage from '~/pages/billing/billings/InvoicesEnquiryPage';
+import StudentAccountForm from '~/pages/billing/studentAccount/StudentAccountForm';
 
-import StudentAccountMPage from '~/pages/studentAccount/StudentAccountMPage';
-import BalanceDetailsPage from '~/pages/studentAccount/BalanceDetailsPage';
-import ReceiptForm from '~/pages/receipts/ReceiptForm';
-import CollectionPage from '~/pages/billings/CollectionPage';
+import StudentAccountMPage from '~/pages/billing/studentAccount/StudentAccountMPage';
+import BalanceDetailsPage from '~/pages/billing/studentAccount/BalanceDetailsPage';
+import ReceiptForm from '~/pages/billing/receipts/ReceiptForm';
+import CollectionPage from '~/pages/billing/billings/CollectionPage';
+import LeaveMPage from '~/pages/education/leave/LeaveMPage';
+import LeaveRequestPage from '~/pages/education/leave/LeaveRequestPage';
+import LeaveApprovalPage from '~/pages/education/leave/LeaveApprovalPage';
+import LeaveEnquiryPage from '~/pages/education/leave/LeaveEnquiryPage';
+import ReceiptMPage from '~/pages/billing/receipts/ReceiptMPage';
+import SessionsMPage from '~/pages/education/sessions/SessionsMPage';
 
 const publicRoutes = [
     { path: urls.home, component: Home },
@@ -46,8 +50,7 @@ const publicRoutes = [
     { path: urls.studentForm, component: StudentForm },
     { path: urls.coursesMaintenance, component: CoursesMPage },
     { path: urls.courseForm, component: CourseForm },
-    { path: urls.generateSession, component: GenerateSession },
-    { path: urls.sessionsManagement, component: SessionsManagement },
+    { path: urls.manageSession, component: SessionsMPage },
     { path: urls.AttendancesMPage, component: AttendancesMPage },
     { path: urls.courseStudentManage, component: CourseStudentsMPage },
     { path: urls.studentEnroll, component: EligibleStudentsEnrollPage },
@@ -69,10 +72,15 @@ const publicRoutes = [
     { path: urls.studentAccountManagement, component: StudentAccountMPage },
     { path: urls.studentAccountForm, component: StudentAccountForm },
 
-    // { path: urls.receiptManagement, component: ReceiptMPage },
+    { path: urls.receiptManagement, component: ReceiptMPage },
     { path: urls.receiptForm, component: ReceiptForm },
 
     { path: urls.balanceDetails, component: BalanceDetailsPage },
+
+    { path: urls.leavesManagement, component: LeaveMPage },
+    { path: urls.leaveRequest, component: LeaveRequestPage },
+    { path: urls.leaveApproval, component: LeaveApprovalPage },
+    { path: urls.leaveEnquiry, component: LeaveEnquiryPage },
 ];
 
 const privateRoutes = [];

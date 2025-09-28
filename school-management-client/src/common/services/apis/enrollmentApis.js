@@ -6,9 +6,9 @@ export const updateEnrollment = async (id, enrollmentData) => apiCallNoPage(`/en
 export const deleteEnrollment = async (id) => apiCallNoPage(`/enrollments/${id}`, 'DELETE');
 
 // related to Student
-export const getStudentsByCourseId = async (courseId) => apiCallNoPage(`/v0/enrollments/courses/${courseId}/students`);
+export const getStudentsDetailByCourseId = async (courseId) => apiCallNoPage(`/education/v2/enrollments/courses/${courseId}/studentsDetail`);
 export const getStudentsWithEnrollmentsByCourseId = async (courseId) => {
-    return await apiCallNoPage(`/education/v2/enrollments/courses/${courseId}`);
+    return await apiCallNoPage(`/education/v2/enrollments/courses/${courseId}/studentsDetail`);
 };
 export const getStudentWithEnrollmentByEnrollmentId = async (enrollmentId) => apiCallNoPage(`/v2/enrollments/${enrollmentId}/studentsWithEnrollments`);
 

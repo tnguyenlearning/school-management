@@ -2,8 +2,6 @@ package com.school.education.clients.dtos;
 
 import java.util.List;
 
-import com.school.education.clients.dto.CourseAllowedFrequencyResponseDTO;
-
 public class CourseAllowedFrequencyResponseWrapperDTO {
     private Embedded _embedded;
 

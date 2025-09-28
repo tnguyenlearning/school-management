@@ -25,9 +25,9 @@ public class ReceiptController {
 	private final ReceiptService receiptService;
 
 	@ResponseStatus(HttpStatus.CREATED)
-	@PostMapping("/{studentAccountId}")
-	public ApiResponse<Receipt> createReceipt(@PathVariable Long studentAccountId, @Valid @RequestBody Receipt request) {
-		Receipt receipt = receiptService.create(studentAccountId, request);
+	@PostMapping("/{studentCode}")
+	public ApiResponse<Receipt> createReceipt(@PathVariable String studentCode, @Valid @RequestBody Receipt request) {
+		Receipt receipt = receiptService.create(studentCode, request);
 		return ApiResponseBuilder.success("Success", receipt, null);
 	}
 	

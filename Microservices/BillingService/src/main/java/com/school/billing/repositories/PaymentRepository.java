@@ -23,11 +23,11 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
 	Payment save(Payment payment);
 
 	@Query("SELECT p FROM Payment p WHERE " +
-	       "(:studentAccountId IS NULL OR p.studentAccount.id = :studentAccountId) AND " +
+	       "(:studentCode IS NULL OR p.studentAccount.studentCode = :studentCode) AND " +
 	       "(:startDate IS NULL OR p.paymentDate >= :startDate) AND " +
 	       "(:endDate IS NULL OR p.paymentDate <= :endDate)")
 	Page<List<Payment>> searchPayments(
-	    @Param("studentAccountId") Long studentAccountId,
+	    @Param("studentCode") String studentCode,
 	    @Param("startDate") LocalDate startDate,
 	    @Param("endDate") LocalDate endDate,
 	    Pageable pageable);

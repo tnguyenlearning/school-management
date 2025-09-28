@@ -3,6 +3,9 @@ package com.school.education.session.entities;
 import java.time.LocalDate;
 
 import com.school.education.constants.LeaveStatus;
+import com.school.education.enrollment.entities.Student;
+import com.school.utilslibrary.constants.RefundStatus;
+import com.school.utilslibrary.constants.RefundType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,8 +37,9 @@ public class LeaveRequest {
 	private Long id;
 
 	@NotNull(message = "StudentID cannot be empty")
-	@Column(nullable = false)
-	private String studentId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "student_id", nullable = false)
+	private Student student;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "session_id", nullable = false)
@@ -48,11 +52,21 @@ public class LeaveRequest {
 	@Enumerated(EnumType.STRING)
 	private LeaveStatus status; // REQUESTED, APPROVED, REJECTED
 
+	@Enumerated(EnumType.STRING)
+	private RefundType refundType; // MONEY, CREDIT_SESSION, NONE
+
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private RefundStatus refundStatus; // NOT_ELIGIBLE, ELIGIBLE, REFUNDED
+	
+	@Column(nullable = false)
 	private LocalDate requestedDate;
+	
 	private LocalDate approvedDate;
 	private LocalDate rejectedDate;
 
-	@Column(nullable = false)
 	private String reason;
+	
+	private String remarks;
 
 }

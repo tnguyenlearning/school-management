@@ -1,6 +1,6 @@
 package com.school.utilsservice.autonum.entity;
 
-import com.school.utilsservice.constants.AnumType;
+import com.school.utilslibrary.constants.AnumType;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

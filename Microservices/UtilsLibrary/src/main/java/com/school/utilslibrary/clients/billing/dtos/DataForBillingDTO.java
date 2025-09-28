@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 import com.school.utilslibrary.clients.billing.constants.EnrollmentStatus;
+import com.school.utilslibrary.clients.education.constants.CourseStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class DataForBillingDTO {
 	private LocalDate endDate;	
 	private Set<DayOfWeek> learningDays;
 	private String courseCode;
+	private CourseStatus courseStatus;
 	private String studentCode;
 
 }

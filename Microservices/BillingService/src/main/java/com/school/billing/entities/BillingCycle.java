@@ -22,6 +22,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -57,9 +58,12 @@ public class BillingCycle {
 	@JsonIgnore
 	private List<Invoice> invoices;
 
-	@OneToMany(mappedBy = "appliedCycle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JsonIgnore
-	private List<RefundTransaction> refundTransactions;
+//	@OneToMany(mappedBy = "appliedCycle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//	@JsonIgnore
+//	private List<RefundTransaction> refundTransactions;
+
+	@OneToMany(mappedBy = "billingCycle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<SessionRefund> sessionRefunds;
 
 	@Column(nullable = false)
 	private LocalDate generatedDate;
@@ -72,6 +76,10 @@ public class BillingCycle {
 
 	@Column(nullable = false)
 	private Integer totalLearningDays;
+
+	@Column(nullable = false)
+	@Default
+	private Integer creditedSessions = 0;
 
 	@Enumerated(EnumType.STRING)
 	private BillingCycleStatus status;

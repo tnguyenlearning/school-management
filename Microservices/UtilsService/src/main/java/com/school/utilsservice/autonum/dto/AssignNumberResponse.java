@@ -1,6 +1,6 @@
 package com.school.utilsservice.autonum.dto;
 
-import com.school.utilsservice.constants.AnumType;
+import com.school.utilslibrary.constants.AnumType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

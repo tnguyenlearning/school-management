@@ -11,7 +11,11 @@ export const fetchReceipts = async (filters) => {
 };
 
 export const fetchReceiptDetails = async (id) => await apiCallNoPage(`/billing/v0receipts/${id}`, 'GET');
-export const createReceipt = async (studentAccountId, data) => {
-    console.log('helllo');
-    return await apiCallNoPage(`/billing/v2/receipts/${studentAccountId}`, 'POST', data);
+
+export const createReceipt = async (studentCode, data) => {
+    return await apiCallNoPage(`/billing/v2/receipts/${studentCode}`, 'POST', data);
+};
+
+export const updateReceipt = async (studentCode, data) => {
+    return await apiCallNoPage(`/billing/v2/receipts/${studentCode}`, 'PUT', data);
 };
