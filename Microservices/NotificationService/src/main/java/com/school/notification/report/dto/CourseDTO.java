@@ -17,7 +17,6 @@ public class CourseDTO {
 	private BigDecimal estFee;
 	private BigDecimal actualFee;
 	private List<DiscountDTO> discounts;
-	private List<RefundDTO> refunds;
 	private JRBeanCollectionDataSource discountDataSource;
 	private JRBeanCollectionDataSource refundDataSource;
 }

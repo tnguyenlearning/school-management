@@ -33,7 +33,6 @@ public class GenerateBillingResponseDTO {
 	private BigDecimal totalFee;
 	private BigDecimal totalDiscount;
 	private BigDecimal totalPaid;
-	private BigDecimal totalRefund;
 
 	private Integer cycleNum;
 	private BillingCycleStatus status;

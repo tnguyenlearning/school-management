@@ -54,26 +54,26 @@ public class ReportService {
 
 	private Map<String, Object> initInvoiceParameters(InvoiceDTO invoice) {
 		Map<String, Object> parameters = new HashMap<>();
-		BigDecimal total = BigDecimal.valueOf(0);
-		parameters.put("invoiceID", invoice.getInvoiceID());
-		parameters.put("name", invoice.getName());
-		parameters.put("address", invoice.getAddress());
-		parameters.put("phone", invoice.getPhone());
-		for (CourseDTO course : invoice.getCourses()) {
-			Optional.ofNullable(course.getDiscounts()).orElseGet(Collections::emptyList).stream().map(discount -> {
-				discount.setValue(discount.getValue().multiply(BigDecimal.valueOf(-1)));
-				return discount;
-			}).collect(Collectors.toList());
-			Optional.ofNullable(course.getRefunds()).orElseGet(Collections::emptyList).stream().map(refund -> {
-				refund.setValue(refund.getValue().multiply(BigDecimal.valueOf(-1)));
-				return refund;
-			}).collect(Collectors.toList());
-			course.setDiscountDataSource(new JRBeanCollectionDataSource(course.getDiscounts()));
-			course.setRefundDataSource(new JRBeanCollectionDataSource(course.getRefunds()));
-			total = total.add(course.getActualFee() == null ? BigDecimal.valueOf(0) : course.getActualFee());
-		}
-		parameters.put("courses", new JRBeanCollectionDataSource(invoice.getCourses()));
-		parameters.put("total", total);
+//		BigDecimal total = BigDecimal.valueOf(0);
+//		parameters.put("invoiceID", invoice.getInvoiceID());
+//		parameters.put("name", invoice.getName());
+//		parameters.put("address", invoice.getAddress());
+//		parameters.put("phone", invoice.getPhone());
+//		for (CourseDTO course : invoice.getCourses()) {
+//			Optional.ofNullable(course.getDiscounts()).orElseGet(Collections::emptyList).stream().map(discount -> {
+//				discount.setValue(discount.getValue().multiply(BigDecimal.valueOf(-1)));
+//				return discount;
+//			}).collect(Collectors.toList());
+//			Optional.ofNullable(course.getRefunds()).orElseGet(Collections::emptyList).stream().map(refund -> {
+//				refund.setValue(refund.getValue().multiply(BigDecimal.valueOf(-1)));
+//				return refund;
+//			}).collect(Collectors.toList());
+//			course.setDiscountDataSource(new JRBeanCollectionDataSource(course.getDiscounts()));
+//			course.setRefundDataSource(new JRBeanCollectionDataSource(course.getRefunds()));
+//			total = total.add(course.getActualFee() == null ? BigDecimal.valueOf(0) : course.getActualFee());
+//		}
+//		parameters.put("courses", new JRBeanCollectionDataSource(invoice.getCourses()));
+//		parameters.put("total", total);
 		return parameters;
 	}
 }

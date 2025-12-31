@@ -58,13 +58,6 @@ public class BillingCycle {
 	@JsonIgnore
 	private List<Invoice> invoices;
 
-//	@OneToMany(mappedBy = "appliedCycle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	@JsonIgnore
-//	private List<RefundTransaction> refundTransactions;
-
-	@OneToMany(mappedBy = "billingCycle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<SessionRefund> sessionRefunds;
-
 	@Column(nullable = false)
 	private LocalDate generatedDate;
 

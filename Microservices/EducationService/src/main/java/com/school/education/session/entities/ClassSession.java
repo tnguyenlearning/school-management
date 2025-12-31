@@ -18,6 +18,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,6 +43,12 @@ public class ClassSession {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "course_id", nullable = false)
 	private Course course;
+
+	@OneToOne(mappedBy = "classSession", fetch = FetchType.LAZY, optional = true)
+	private SessionCancellation cancellation;
+
+	@OneToMany(mappedBy = "classSession", fetch = FetchType.LAZY)
+	private List<LeaveRequest> leaveRequests;
 
 	private String remark;
 
