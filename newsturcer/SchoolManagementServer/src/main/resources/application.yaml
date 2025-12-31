@@ -1,0 +1,19 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://localhost:1433;databaseName=SCHOOL;encrypt=false;trustServerCertificate=true
+    username: admin
+    password: 1
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  data:
+    rest:
+      detection-strategy: annotated
+      base-path: /v0
